@@ -1,6 +1,6 @@
 if(process.env.NODE_ENV === 'production'){
     module.exports = {
-        mongoURI: `mongodb+srv://matt:${process.env.DB_PASS}@cluster0-omiib.mongodb.net/test?retryWrites=true&w=majority`
+        mongoURI: process.env.MONGODB_URI
     }
 } else {
     module.exports = {
