@@ -8,6 +8,8 @@ const session = require('express-session');
 const path = require('path');
 const passport = require('passport');
 
+require('dotenv').config()
+
 const app = express();
 
 //Load Routes
@@ -16,6 +18,8 @@ const users = require('./routes/users');
 
 //Passport Config
 require('./config/passport')(passport);
+//DB Config
+const db = require('./config/database');
 
 //Body Parser Middleware
 app.use(bodyParser.urlencoded({extended: false}));
@@ -51,7 +55,7 @@ app.use(function(req, res, next) {
 })
 
 //Connect to Mongoose
-mongoose.connect('mongodb://localhost/vidjot-dev', {
+mongoose.connect(db.mongoURI, {
     useNewUrlParser: true
 }).then(() => {
     console.log('MongoDB Connected...')
@@ -78,7 +82,7 @@ app.get('/about', (req, res) => {
 app.use('/ideas', ideas);
 app.use('/users', users);
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, ()=> {
     console.log(`Server listening on port ${port}`);
