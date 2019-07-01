@@ -67,7 +67,7 @@ app.set('view engine', 'handlebars');
 
 //Index Route
 app.get('/', (req, res)=> {
-    const title = 'Dynamic Welcome!';
+    const title = 'Welcome!';
     res.render('index', {
         title: title
     });
